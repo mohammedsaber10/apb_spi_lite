@@ -1,10 +1,10 @@
-RTL = ../rtl/baudrate_gen.v
+RTL = ../rtl/fifo.v
 SVA =
-TB = baudrate_tb.v 
+TB = fifo_tb.v 
 verbosity = UVM_MEDIUM
 uvm_compile_options = 
 #compile_options = -ntb_opts uvm-1.1
-compile_switches = -sverilog -assert enable_diag -lca -debug_access+all -timescale=1ns/1ns -kdb +vcs+vcdpluson -l comp.log ${uvm_compile_options}
+compile_switches = -sverilog -assert enable_diag -lca -debug_access+all -timescale=1ns/1ns -kdb +vcs+vcdpluson -l comp.log ${uvm_compile_options} +define+ASSERT
 #uvm_runtime_options = +UVM_VERBOSITY=${verbosity} +UVM_OBJECTION_TRACE 
 uvm_runtime_options =
 runtime_switches = -assert verbose -l sim.log ${uvm_runtime_options}
