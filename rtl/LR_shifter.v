@@ -30,7 +30,7 @@ else                 shift_reg <= shift_reg_next;
 end
 
 // assign the serial data output bit to the LSB or MSB of the shifter only if the shifter is enabled,
-// else it will be assigned a zero if the shifter is disabled.
+
 
 assign sdo = (sh_rl)? shift_reg[0]: shift_reg[DATAWIDTH-1];
 
