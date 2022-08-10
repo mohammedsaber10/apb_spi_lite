@@ -13,18 +13,6 @@ This project is aimed to implement the spi communication protocol in master mode
 * Half duplex, or Full duplex data transmission, relying on separate transmitter or receiver.
 * TX and RX data buffering so that the CPU can send multiple transaction without need to wait for a single byte to be transmitted or received.
 
-<img src='https://g.gravizo.com/svg?
- digraph G {
-   main -> parse -> execute;
-   main -> init;
-   main -> cleanup;
-   execute -> make_string;
-   execute -> printf
-   init -> make_string;
-   main -> printf;
-   execute -> compare;
- }
-'/>
 
 ### Design and Implementaion:
 * The spi module is is designed compliantly to Motorola stardard, and then I added some other features to the design from other papers.
