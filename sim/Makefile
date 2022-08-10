@@ -1,13 +1,13 @@
-RTL = ../rtl/fifo.v
+RTL = ../rtl/LR_shifter.v ../rtl/baudrate_gen.v ../rtl/spi_transmitter.v
 SVA =
-TB = fifo_tb.v 
+TB = spi_tx_tb.sv 
 verbosity = UVM_MEDIUM
 uvm_compile_options = 
 #compile_options = -ntb_opts uvm-1.1
 compile_switches = -sverilog -assert enable_diag -lca -debug_access+all -timescale=1ns/1ns -kdb +vcs+vcdpluson -l comp.log ${uvm_compile_options} +define+ASSERT
 #uvm_runtime_options = +UVM_VERBOSITY=${verbosity} +UVM_OBJECTION_TRACE 
 uvm_runtime_options =
-runtime_switches = -assert verbose -l sim.log ${uvm_runtime_options}
+runtime_switches =  -l sim.log ${uvm_runtime_options} #-assert verbose
 all: compile run
 
 compile: 

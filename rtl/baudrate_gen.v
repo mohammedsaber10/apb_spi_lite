@@ -18,7 +18,7 @@ reg [11:0] counter; // clock divider register
 wire count_done;
 wire sample_cpha0;
 wire sample_cpha1;
-wire sample_enable;
+reg sample_enable;
 // clock dividor counter
 always @(posedge clk_i, negedge rst_n)
 if(!rst_n)
@@ -56,7 +56,7 @@ end
 
 
 assign sample_cpha0 = sample_enable && ((!cpol &&  sclk) || (cpol && !sclk)) && (counter == 0);
-assign sample_cpha1 = sclk_enable && ((!cpol && !sclk) || (cpol &&  sclk)) && (counter == 0);
+assign sample_cpha1 = sample_enable && ((!cpol && !sclk) || (cpol &&  sclk)) && (counter == 0);
 assign sample       = (cpha)? sample_cpha1 : sample_cpha0;
 
 

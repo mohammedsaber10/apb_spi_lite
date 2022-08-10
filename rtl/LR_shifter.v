@@ -5,10 +5,11 @@ parameter DATAWIDTH = 8
 (
 input                 clk_i,
 input                 rst_n,
-input [DATAWIDTH-1:0] data,
-input                 ld,
+input [DATAWIDTH-1:0] data_i,
+input                 valid_i,
 input                 sh_en,
 input                 sh_rl,  // if sh_rl = 1 --> shift right, sh_rl = 0 --> sh
+output                ready_o,
 output                sdo
 );
 reg   [DATAWIDTH-1:0] shift_reg;
@@ -16,7 +17,7 @@ reg   [DATAWIDTH-1:0] shift_reg_next;
 
 
 always@(*) begin
-if(ld)                    shift_reg_next = data;
+if(valid_i)               shift_reg_next = data_i;
 else if (sh_en &&  sh_rl) shift_reg_next = {1'b0, shift_reg[DATAWIDTH-1:1]};
 else if (sh_en && !sh_rl) shift_reg_next = {shift_reg[DATAWIDTH-2:0], 1'b0};
 else                      shift_reg_next = shift_reg;
@@ -29,9 +30,13 @@ if (!rst_n)          shift_reg <= 0;
 else                 shift_reg <= shift_reg_next;
 end
 
-// assign the serial data output bit to the LSB or MSB of the shifter only if the shifter is enabled,
+// assigning ready signal when the shift is done
 
+assign ready_o = (shift_reg == 0);
 
+// assign the serial data output bit to the LSB or MSB of the shifter only if the shifter is enabled
 assign sdo = (sh_rl)? shift_reg[0]: shift_reg[DATAWIDTH-1];
+
+
 
 endmodule
