@@ -1,5 +1,5 @@
 # SPI Master with APB Stub
-### [On Development]
+### [Under Development]
 This project is aimed to implement the spi communication protocol in master mode with apb slave as its interface.
 
 ### Some Concepts are used in the design:
